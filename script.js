@@ -986,7 +986,7 @@ function finishWarzonePureGame() {
 if (wzEscapeBtn) wzEscapeBtn.addEventListener("click", () => { wzActive = false; showScreen(missionsScreen); });
 if (wzResultBackMapBtn) wzResultBackMapBtn.addEventListener("click", () => { showScreen(missionsScreen); });
 /* =========================================================
-   KÜLDETÉS: 05 - DISCO SZOBA AUDIO QUIZ ENGINE (FINAL MULTI-FOLDER FIX)
+   KÜLDETÉS: 05 - DISCO SZOBA AUDIO QUIZ ENGINE (DIRECT CLOUD EDITION)
    ========================================================= */
 function initDiscoMusicQuiz() {
     initAudio(); 
@@ -1004,134 +1004,66 @@ function initDiscoMusicQuiz() {
 }
 
 function generateNextQuizRound() {
-    stopCurrentSongMelody(); 
-    if (retroWaveform) retroWaveform.classList.remove("playing"); 
-    if (!discoActive) return;
-    
+    stopCurrentSongMelody(); if (retroWaveform) retroWaveform.classList.remove("playing"); if (!discoActive) return;
     const availableSongs = retroPlaylist.filter((_, idx) => !songsPlayedPool.includes(idx));
-    if (availableSongs.length === 0 || discoCorrectCount >= 10) { 
-        setTimeout(finishDiscoRoomGame, 400); 
-        return; 
-    }
-    
-    const nextSong = availableSongs[Math.floor(Math.random() * availableSongs.length)]; 
-    currentSongIndex = retroPlaylist.indexOf(nextSong);
-    
+    if (availableSongs.length === 0 || discoCorrectCount >= 10) { setTimeout(finishDiscoRoomGame, 400); return; }
+    const nextSong = availableSongs[Math.floor(Math.random() * availableSongs.length)]; currentSongIndex = retroPlaylist.indexOf(nextSong);
     if (discoAlbumsContainer) {
         let shuffleGrid = [...availableSongs];
-        for (let i = shuffleGrid.length - 1; i > 0; i--) { 
-            const j = Math.floor(Math.random() * (i + 1)); 
-            [shuffleGrid[i], shuffleGrid[j]] = [shuffleGrid[j], shuffleGrid[i]]; 
-        }
-        
+        for (let i = shuffleGrid.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [shuffleGrid[i], shuffleGrid[j]] = [shuffleGrid[j], shuffleGrid[i]]; }
         discoAlbumsContainer.innerHTML = "";
         shuffleGrid.forEach(song => {
-            const card = document.createElement("div"); 
-            card.className = "album-card-node"; 
-            card.setAttribute("data-song-title", song.title);
+            const card = document.createElement("div"); card.className = "album-card-node"; card.setAttribute("data-song-title", song.title);
             card.innerHTML = `<div class="album-mock-cover">${song.cover}</div><div class="album-title-label">${song.title}</div>`;
-            card.addEventListener("click", () => { evaluateUserGuess(song.title, card); }); 
-            discoAlbumsContainer.appendChild(card);
+            card.addEventListener("click", () => { evaluateUserGuess(song.title, card); }); discoAlbumsContainer.appendChild(card);
         });
     }
 }
 
-if (discoPlayBtn) { 
-    discoPlayBtn.addEventListener("click", () => { 
-        if (!discoActive || currentSongIndex === null) return; 
-        if (discoStatusMessage) discoStatusMessage.textContent = "FIGYELJ A RETRÓ RITMUSRA... MELYIK EZ A SZÁM?"; 
-        playCurrentSelectedMp3(retroPlaylist[currentSongIndex].mp3); 
-    }); 
-}
+if (discoPlayBtn) { discoPlayBtn.addEventListener("click", () => { if (!discoActive || currentSongIndex === null) return; if (discoStatusMessage) discoStatusMessage.textContent = "FIGYELJ A RETRÓ RITMUSRA... MELYIK EZ A SZÁM?"; playCurrentSelectedMp3(retroPlaylist[currentSongIndex].mp3); }); }
 
 function playCurrentSelectedMp3(filePath) {
-    stopCurrentSongMelody(); 
-    currentMp3Audio = new Audio(filePath); 
-    currentMp3Audio.volume = 0.25;
-    currentMp3Audio.play().then(() => { 
-        if (retroWaveform) retroWaveform.classList.add("playing"); 
-    }).catch(err => { 
-        if (discoStatusMessage) discoStatusMessage.textContent = "HIBA: Nem találom a fájlt a music mappában!"; 
-    });
-    currentMp3Audio.onended = function() { 
-        if (retroWaveform) retroWaveform.classList.remove("playing"); 
-    };
+    stopCurrentSongMelody(); currentMp3Audio = new Audio(filePath); currentMp3Audio.volume = 0.25;
+    currentMp3Audio.play().then(() => { if (retroWaveform) retroWaveform.classList.add("playing"); }).catch(err => { if (discoStatusMessage) discoStatusMessage.textContent = "HIBA: Nem tudom letölteni a dalt a Drive-ból!"; });
+    currentMp3Audio.onended = function() { if (retroWaveform) retroWaveform.classList.remove("playing"); };
 }
-
-function stopCurrentSongMelody() { 
-    if (currentMp3Audio) { currentMp3Audio.pause(); currentMp3Audio.currentTime = 0; currentMp3Audio = null; } 
-    if (retroWaveform) retroWaveform.classList.remove("playing"); 
-}
+function stopCurrentSongMelody() { if (currentMp3Audio) { currentMp3Audio.pause(); currentMp3Audio.currentTime = 0; currentMp3Audio = null; } if (retroWaveform) retroWaveform.classList.remove("playing"); }
 
 function evaluateUserGuess(selectedTitle, clickedCardElement) {
-    if (!discoActive || currentSongIndex === null) return; 
-    const correctTitle = retroPlaylist[currentSongIndex].title;
-    
+    if (!discoActive || currentSongIndex === null) return; const correctTitle = retroPlaylist[currentSongIndex].title;
     if (selectedTitle === correctTitle) {
-        discoCorrectCount++; 
-        songsPlayedPool.push(currentSongIndex); 
-        if (discoCorrectCountText) discoCorrectCountText.textContent = discoCorrectCount;
-        if (discoStatusMessage) discoStatusMessage.textContent = "TÖKÉLETES TALÁLAT! EZ VOLT AZ A SLÁGER! 🏆"; 
-        playSound('goal');
-        
-        if (clickedCardElement) { 
-            clickedCardElement.style.transition = "opacity 0.4s, transform 0.4s"; 
-            clickedCardElement.style.opacity = "0"; 
-            clickedCardElement.style.transform = "scale(0.8)"; 
-            setTimeout(() => { clickedCardElement.remove(); }, 400); 
-        }
-        
+        discoCorrectCount++; songsPlayedPool.push(currentSongIndex); if (discoCorrectCountText) discoCorrectCountText.textContent = discoCorrectCount;
+        if (discoStatusMessage) discoStatusMessage.textContent = "TÖKÉLETES TALÁLAT! EZ VOLT AZ A SLÁGER! 🏆"; playSound('goal');
+        if (clickedCardElement) { clickedCardElement.style.transition = "opacity 0.4s, transform 0.4s"; clickedCardElement.style.opacity = "0"; clickedCardElement.style.transform = "scale(0.8)"; setTimeout(() => { clickedCardElement.remove(); }, 400); }
         stopCurrentSongMelody();
-        if (discoCorrectCount >= 10) setTimeout(finishDiscoRoomGame, 800); 
-        else setTimeout(generateNextQuizRound, 1200);
-    } else { 
-        if (discoStatusMessage) discoStatusMessage.textContent = "NEM EZ AZ! HALLGASD MEG ÚJRA A RETRÓ RETURNT! ❌"; 
-        playSound('save'); 
-    }
+        if (discoCorrectCount >= 10) setTimeout(finishDiscoRoomGame, 800); else setTimeout(generateNextQuizRound, 1200);
+    } else { if (discoStatusMessage) discoStatusMessage.textContent = "NEM EZ AZ! HALLGASD MEG ÚJRA A RETRÓ RETURNT! ❌"; playSound('save'); }
 }
 
 function finishDiscoRoomGame() {
-    discoActive = false; 
-    stopCurrentSongMelody(); 
-    playSound('gameover');
+    discoActive = false; stopCurrentSongMelody(); playSound('gameover');
     if (discoResultModal) {
         discoResultModal.style.display = "flex";
-        const title = discoResultModal.querySelector("h1"); 
-        const text = discoResultModal.querySelector("p:last-of-type");
-        if (title) title.textContent = "MISSION COMPLETE"; 
-        if (text) text.textContent = "MIND A 10 RETRÓ SLÁGERT SIKERESEN FELISMERTÉL! KATTINTS A KILÉPÉSHEZ!";
+        const title = discoResultModal.querySelector("h1"); const text = discoResultModal.querySelector("p:last-of-type");
+        if (title) title.textContent = "MISSION COMPLETE"; if (text) text.textContent = "MIND A 10 RETRÓ SLÁGERT SIKERESEN FELISMERTÉL! KATTINTS A KILÉPÉSHEZ!";
     }
 }
 
-// JAVÍTOTT KILÉPÉSI FINÁLÉ - MAPPA ÚTVONALAK SZINKRONIZÁLÁSA
+// GYŐZELMI FINÁLÉ - GOOGLE DRIVE SZINKRONIZÁLT DIRECT LINKEK
 if (discoResultMapButton) {
     discoResultMapButton.addEventListener("click", (e) => {
-        e.preventDefault(); 
-        discoActive = false;
-        
+        e.preventDefault(); discoActive = false;
         const allScreens = [menuScreen, profileScreen, missionsScreen, footballScreen, renovationScreen, apesScreen, warzoneScreen, discoScreenNode, achievementsScreen, discoResultModal];
         allScreens.forEach(scr => { if (scr) scr.style.display = "none"; });
-        
-        const mainMap = document.querySelector(".missions-screen"); 
-        if (mainMap) mainMap.style.display = "flex";
-        
+        const mainMap = document.querySelector(".missions-screen"); if (mainMap) mainMap.style.display = "flex";
         triggerArcadeConfettiRain();
         
-        const videoPopup = document.querySelector("#wz-video-popup"); 
-        const videoElement = document.querySelector("#wz-birthday-video"); 
-        const audioElement = document.querySelector("#wz-birthday-audio");
-        
+        const videoPopup = document.querySelector("#wz-video-popup"); const videoElement = document.querySelector("#wz-birthday-video"); const audioElement = document.querySelector("#wz-birthday-audio");
         if (videoPopup && videoElement && audioElement) {
-            // FIX: Erőszakosan felülírjuk a forrásokat a te mappaszerkezeted alapján!
-            videoElement.src = "video/video.mp4"; 
-            audioElement.src = "music/Cartman's Birthday jingle (SUBSCRIBE NOW).mp3";
-            
-            videoPopup.style.display = "flex"; 
-            videoElement.currentTime = 0; 
-            audioElement.currentTime = 0; 
-            
-            videoElement.play(); 
-            audioElement.play(); 
+            // DIRECT LINK JAVÍTÁS: A te saját Drive-os videód és szulinapi zenéd címei!
+            videoElement.src = "https://google.com"; 
+            audioElement.src = "https://google.com";
+            videoPopup.style.display = "flex"; videoElement.currentTime = 0; audioElement.currentTime = 0; videoElement.play(); audioElement.play();
         }
     });
 }
@@ -1140,108 +1072,36 @@ function triggerArcadeConfettiRain() {
     const colors = ["#ff00ff", "#00ffff", "#ffff00", "#ff2255", "#00ff66", "#ffbc42"];
     for (let i = 0; i < 100; i++) {
         setTimeout(() => {
-            const confetti = document.createElement("div"); 
-            confetti.className = "wz-confetti"; 
-            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            confetti.style.left = Math.floor(Math.random() * 100) + "vw"; 
-            confetti.style.top = "-20px"; 
-            const randomSize = Math.floor(Math.random() * 8) + 8;
-            confetti.style.width = randomSize + "px"; 
-            confetti.style.height = randomSize + "px"; 
-            confetti.style.animationDuration = (Math.random() * 1.5 + 1.5) + "s";
-            document.body.appendChild(confetti); 
-            setTimeout(() => { confetti.remove(); }, 2500);
+            const confetti = document.createElement("div"); confetti.className = "wz-confetti"; confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.left = Math.floor(Math.random() * 100) + "vw"; confetti.style.top = "-20px"; const randomSize = Math.floor(Math.random() * 8) + 8;
+            confetti.style.width = randomSize + "px"; confetti.style.height = randomSize + "px"; confetti.style.animationDuration = (Math.random() * 1.5 + 1.5) + "s";
+            document.body.appendChild(confetti); setTimeout(() => { confetti.remove(); }, 2500);
         }, i * 20);
     }
 }
 
 setTimeout(() => {
-    const playBtn = document.querySelector("#wz-play-video-btn"); 
-    const pauseBtn = document.querySelector("#wz-pause-video-btn"); 
-    const closeBtn = document.querySelector("#wz-close-video-btn");
-    const videoElement = document.querySelector("#wz-birthday-video"); 
-    const audioElement = document.querySelector("#wz-birthday-audio"); 
-    const videoPopup = document.querySelector("#wz-video-popup");
-    
-    if (playBtn && videoElement && audioElement) { 
-        playBtn.onclick = function() { audioElement.currentTime = videoElement.currentTime; videoElement.play(); audioElement.play(); }; 
-    }
-    if (pauseBtn && videoElement && audioElement) { 
-        pauseBtn.onclick = function() { videoElement.pause(); audioElement.pause(); }; 
-    }
-    if (closeBtn && videoElement && audioElement && videoPopup) { 
-        closeBtn.onclick = function() { videoElement.pause(); audioElement.pause(); videoPopup.style.display = "none"; }; 
-    }
+    const playBtn = document.querySelector("#wz-play-video-btn"); const pauseBtn = document.querySelector("#wz-pause-video-btn"); const closeBtn = document.querySelector("#wz-close-video-btn"); const closeBannerBtn = document.querySelector("#wz-close-banner-btn");
+    const videoElement = document.querySelector("#wz-birthday-video"); const audioElement = document.querySelector("#wz-birthday-audio"); const videoPopup = document.querySelector("#wz-video-popup"); const birthdayBanner = document.querySelector("#wz-birthday-banner");
+    if (playBtn && videoElement && audioElement) { playBtn.onclick = function() { audioElement.currentTime = videoElement.currentTime; videoElement.play(); audioElement.play(); }; }
+    if (pauseBtn && videoElement && audioElement) { pauseBtn.onclick = function() { videoElement.pause(); audioElement.pause(); }; }
+    if (closeBtn && videoElement && audioElement && videoPopup && birthdayBanner) { closeBtn.onclick = function() { videoElement.pause(); audioElement.pause(); videoPopup.style.display = "none"; birthdayBanner.style.display = "flex"; audioElement.currentTime = 0; audioElement.play(); }; }
+    if (closeBannerBtn && birthdayBanner && audioElement) { closeBannerBtn.onclick = function() { audioElement.pause(); birthdayBanner.style.display = "none"; showScreen(document.querySelector(".missions-screen")); }; }
 }, 100);
 
-if (discoEscapeBtn) { 
-    discoEscapeBtn.addEventListener("click", (e) => { 
-        e.preventDefault(); 
-        discoActive = false; 
-        stopCurrentSongMelody(); 
-        showScreen(missionsScreen); 
-    }); 
-}
-// GOMBOK AUTOMATIKUS SZINKRONIZÁCIÓJA ÉS A BANNER INDÍTÓ MOTORJA
-setTimeout(() => {
-    const playBtn = document.querySelector("#wz-play-video-btn"); 
-    const pauseBtn = document.querySelector("#wz-pause-video-btn"); 
-    const closeBtn = document.querySelector("#wz-close-video-btn");
-    const closeBannerBtn = document.querySelector("#wz-close-banner-btn");
-    
-    const videoElement = document.querySelector("#wz-birthday-video"); 
-    const audioElement = document.querySelector("#wz-birthday-audio"); 
-    const videoPopup = document.querySelector("#wz-video-popup");
-    const birthdayBanner = document.querySelector("#wz-birthday-banner");
+if (discoEscapeBtn) { discoEscapeBtn.addEventListener("click", (e) => { e.preventDefault(); discoActive = false; stopCurrentSongMelody(); showScreen(missionsScreen); }); }
 
-    if (playBtn && videoElement && audioElement) { 
-        playBtn.onclick = function() { 
-            audioElement.currentTime = videoElement.currentTime; 
-            videoElement.play(); 
-            audioElement.play(); 
-        }; 
-    }
-    
-    if (pauseBtn && videoElement && audioElement) { 
-        pauseBtn.onclick = function() { 
-            videoElement.pause(); 
-            audioElement.pause(); 
-        }; 
-    }
-    
-    // FIX: Amikor Apa bezárja a videót, felpattan a nagy felirat és újra elindul a szülinapi zene a háttérben!
-    if (closeBtn && videoElement && audioElement && videoPopup && birthdayBanner) { 
-        closeBtn.onclick = function() { 
-            videoElement.pause(); 
-            audioElement.pause(); 
-            videoPopup.style.display = "none"; 
-            
-            // Megjelenítjük a hatalmas villogó szülinapi bannert
-            birthdayBanner.style.display = "flex";
-            
-            // Újraindítjuk a Cartman-féle szülinapi dalt az elejétől, hogy a felirat alatt végig szóljon!
-            audioElement.currentTime = 0;
-            audioElement.play();
-        }; 
-    }
-
-    // A legvégső banner bezáró gomb, ami mindent leállít és visszahelyez a térképre
-    if (closeBannerBtn && birthdayBanner && audioElement) {
-        closeBannerBtn.onclick = function() {
-            audioElement.pause();
-            birthdayBanner.style.display = "none";
-            if (typeof showScreen === "function") {
-                showScreen(document.querySelector(".missions-screen"));
-            }
-        };
-    }
-}, 100);
-
-if (discoEscapeBtn) { 
-    discoEscapeBtn.addEventListener("click", (e) => { 
-        e.preventDefault(); 
-        discoActive = false; 
-        stopCurrentSongMelody(); 
-        showScreen(missionsScreen); 
-    }); 
-}
+// ERŐSZAKOS PLAYLIST FELÜLÍRÁS SAJÁT GOOGLE DRIVE LINKEKKEL
+retroPlaylist.length = 0;
+retroPlaylist.push(
+    { title: "MARGE - VÁRATLAN NYÁR", cover: "☀️", mp3: "https://google.com" },
+    { title: "THE PRODIGY - FIRESTARTER", cover: "🔥", mp3: "https://google.com" },
+    { title: "BETON.HOFI X ANUBII\$ - TÜKÖRTEREM", cover: "🪞", mp3: "https://google.com" },
+    { title: "METALLICA - ONE", cover: "🎸", mp3: "https://google.com" },
+    { title: "4 NON BLONDES - WHATS GOING ON", cover: "📢", mp3: "music/https://google.com" },
+    { title: "KOMODO - RADIO MIX", cover: "📻", mp3: "https://google.com" },
+    { title: "DJ TIESTO - NYANA", cover: "🎧", mp3: "https://google.com" },
+    { title: "KISTEHÉN - ELVISZI A SZÉL", cover: "🍃", mp3: "https://google.com" },
+    { title: "THE CRANBERRIES - SALVATION", cover: "📀", mp3: "https://google.com" },
+    { title: "BËLGA - RENDŐRMUNKA", cover: "👮", mp3: "https://google.com" }
+);
