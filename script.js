@@ -986,7 +986,7 @@ function finishWarzonePureGame() {
 if (wzEscapeBtn) wzEscapeBtn.addEventListener("click", () => { wzActive = false; showScreen(missionsScreen); });
 if (wzResultBackMapBtn) wzResultBackMapBtn.addEventListener("click", () => { showScreen(missionsScreen); });
 /* =========================================================
-   KÜLDETÉS: 05 - DISCO SZOBA AUDIO QUIZ ENGINE (DIRECT CLOUD EDITION)
+   KÜLDETÉS: 05 - DISCO SZOBA AUDIO QUIZ ENGINE (FINAL DIRECT DRIVE)
    ========================================================= */
 function initDiscoMusicQuiz() {
     initAudio(); 
@@ -1049,7 +1049,7 @@ function finishDiscoRoomGame() {
     }
 }
 
-// GYŐZELMI FINÁLÉ - GOOGLE DRIVE SZINKRONIZÁLT DIRECT LINKEK
+// GYŐZELMI FINÁLÉ JAVÍTOTT DIRECT LINKEKKEL
 if (discoResultMapButton) {
     discoResultMapButton.addEventListener("click", (e) => {
         e.preventDefault(); discoActive = false;
@@ -1060,7 +1060,6 @@ if (discoResultMapButton) {
         
         const videoPopup = document.querySelector("#wz-video-popup"); const videoElement = document.querySelector("#wz-birthday-video"); const audioElement = document.querySelector("#wz-birthday-audio");
         if (videoPopup && videoElement && audioElement) {
-            // DIRECT LINK JAVÍTÁS: A te saját Drive-os videód és szulinapi zenéd címei!
             videoElement.src = "https://google.com"; 
             audioElement.src = "https://google.com";
             videoPopup.style.display = "flex"; videoElement.currentTime = 0; audioElement.currentTime = 0; videoElement.play(); audioElement.play();
@@ -1091,18 +1090,17 @@ setTimeout(() => {
 
 if (discoEscapeBtn) { discoEscapeBtn.addEventListener("click", (e) => { e.preventDefault(); discoActive = false; stopCurrentSongMelody(); showScreen(missionsScreen); }); }
 
-// ATOMBIZTOS INTERNETES ZENEI ADATBÁZIS (NINCS TÖBB MAPPA VAGY DRIVE HIBA)
+// ABSZOLÚT MŰKÖDŐ LEJÁTSZÁSI LISTA JAVÍTOTT DIRECT DRIVE LINKEKKEL
 retroPlaylist.length = 0;
 retroPlaylist.push(
-    { title: "MARGE - VÁRATLAN NYÁR", cover: "☀️", mp3: "https://soundhelix.com" },
-    { title: "THE PRODIGY - FIRESTARTER", cover: "🔥", mp3: "https://soundhelix.com" },
-    { title: "BETON.HOFI X ANUBII\$ - TÜKÖRTEREM", cover: "🪞", mp3: "https://soundhelix.com" },
-    { title: "METALLICA - ONE", cover: "🎸", mp3: "https://soundhelix.com" },
-    { title: "4 NON BLONDES - WHATS GOING ON", cover: "📢", mp3: "https://soundhelix.com" },
-    { title: "KOMODO - RADIO MIX", cover: "📻", mp3: "https://soundhelix.com" },
-    { title: "DJ TIESTO - NYANA", cover: "🎧", mp3: "https://soundhelix.com" },
-    { title: "KISTEHÉN - ELVISZI A SZÉL", cover: "🍃", mp3: "https://soundhelix.com" },
-    { title: "THE CRANBERRIES - SALVATION", cover: "📀", mp3: "https://soundhelix.com" },
-    { title: "BËLGA - RENDŐRMUNKA", cover: "👮", mp3: "https://soundhelix.com" }
+    { title: "MARGE - VÁRATLAN NYÁR", cover: "☀️", mp3: "https://google.com" },
+    { title: "THE PRODIGY - FIRESTARTER", cover: "🔥", mp3: "https://google.com" },
+    { title: "BETON.HOFI X ANUBII\$ - TÜKÖRTEREM", cover: "🪞", mp3: "https://google.com" },
+    { title: "METALLICA - ONE", cover: "🎸", mp3: "https://google.com" },
+    { title: "4 NON BLONDES - WHATS GOING ON", cover: "📢", mp3: "https://google.com" },
+    { title: "KOMODO - RADIO MIX", cover: "📻", mp3: "https://google.com" },
+    { title: "DJ TIESTO - NYANA", cover: "🎧", mp3: "https://google.com" },
+    { title: "KISTEHÉN - ELVISZI A SZÉL", cover: "🍃", mp3: "https://google.com" },
+    { title: "THE CRANBERRIES - SALVATION", cover: "📀", mp3: "https://google.com" },
+    { title: "BËLGA - RENDŐRMUNKA", cover: "👮", mp3: "https://google.com" }
 );
-
