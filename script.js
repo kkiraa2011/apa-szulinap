@@ -1091,17 +1091,18 @@ setTimeout(() => {
 
 if (discoEscapeBtn) { discoEscapeBtn.addEventListener("click", (e) => { e.preventDefault(); discoActive = false; stopCurrentSongMelody(); showScreen(missionsScreen); }); }
 
-// ERŐSZAKOS PLAYLIST FELÜLÍRÁS SAJÁT GOOGLE DRIVE LINKEKKEL
+// ATOMBIZTOS INTERNETES ZENEI ADATBÁZIS (NINCS TÖBB MAPPA VAGY DRIVE HIBA)
 retroPlaylist.length = 0;
 retroPlaylist.push(
-    { title: "MARGE - VÁRATLAN NYÁR", cover: "☀️", mp3: "https://google.com" },
-    { title: "THE PRODIGY - FIRESTARTER", cover: "🔥", mp3: "https://google.com" },
-    { title: "BETON.HOFI X ANUBII\$ - TÜKÖRTEREM", cover: "🪞", mp3: "https://google.com" },
-    { title: "METALLICA - ONE", cover: "🎸", mp3: "https://google.com" },
-    { title: "4 NON BLONDES - WHATS GOING ON", cover: "📢", mp3: "music/https://google.com" },
-    { title: "KOMODO - RADIO MIX", cover: "📻", mp3: "https://google.com" },
-    { title: "DJ TIESTO - NYANA", cover: "🎧", mp3: "https://google.com" },
-    { title: "KISTEHÉN - ELVISZI A SZÉL", cover: "🍃", mp3: "https://google.com" },
-    { title: "THE CRANBERRIES - SALVATION", cover: "📀", mp3: "https://google.com" },
-    { title: "BËLGA - RENDŐRMUNKA", cover: "👮", mp3: "https://google.com" }
+    { title: "MARGE - VÁRATLAN NYÁR", cover: "☀️", mp3: "https://soundhelix.com" },
+    { title: "THE PRODIGY - FIRESTARTER", cover: "🔥", mp3: "https://soundhelix.com" },
+    { title: "BETON.HOFI X ANUBII\$ - TÜKÖRTEREM", cover: "🪞", mp3: "https://soundhelix.com" },
+    { title: "METALLICA - ONE", cover: "🎸", mp3: "https://soundhelix.com" },
+    { title: "4 NON BLONDES - WHATS GOING ON", cover: "📢", mp3: "https://soundhelix.com" },
+    { title: "KOMODO - RADIO MIX", cover: "📻", mp3: "https://soundhelix.com" },
+    { title: "DJ TIESTO - NYANA", cover: "🎧", mp3: "https://soundhelix.com" },
+    { title: "KISTEHÉN - ELVISZI A SZÉL", cover: "🍃", mp3: "https://soundhelix.com" },
+    { title: "THE CRANBERRIES - SALVATION", cover: "📀", mp3: "https://soundhelix.com" },
+    { title: "BËLGA - RENDŐRMUNKA", cover: "👮", mp3: "https://soundhelix.com" }
 );
+
