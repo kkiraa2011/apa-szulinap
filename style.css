@@ -1,0 +1,781 @@
+
+@import url('https://googleapis.com');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #10182F;
+    color: #FFF4DC;
+    font-family: monospace;
+}
+
+.game {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* ========================= KÖZPONTI INTERFÉSZEK ========================= */
+.menu-screen, .profile-screen, .missions-screen {
+    width: 100%;
+    max-width: 900px; 
+    min-height: 650px; 
+    border: 4px solid #5269A8;
+    background: #18244A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    box-shadow: inset 0 0 0 10px #10182F, 0 0 0 2px #7184C0;
+}
+
+.company {
+    font-size: 14px; 
+    letter-spacing: 4px;
+    color: #AAB6D8;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-size: 65px; 
+    letter-spacing: 10px;
+    margin: 0;
+    font-weight: bold;
+    color: #FFF4DC;
+    text-shadow: 5px 5px 0 #4169E1;
+}
+
+h2 {
+    font-size: 20px; 
+    letter-spacing: 6px;
+    color: #79D7E8;
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 400px; 
+    max-width: 100%;
+}
+
+.menu button {
+    background: #263663;
+    color: #FFF4DC;
+    border: 3px solid #5269A8;
+    padding: 18px;
+    font-family: monospace;
+    font-size: 18px; 
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.menu button:hover {
+    background: #38539A;
+    border-color: #79D7E8;
+    color: #FFFFFF;
+}
+
+.mission-button {
+    border-color: #79D7E8 !important;
+    background: #4169E1 !important;
+    color: #FFF4DC !important;
+    box-shadow: 6px 6px 0 #B59AE8;
+}
+
+.status {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 16px; 
+    color: #79D7E8;
+    line-height: 1.6;
+}
+
+.year {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #5269A8;
+}
+
+/* ========================= PROFILE SCREEN ========================= */
+.profile-level { color: #6ee7ff; letter-spacing: 4px; font-size: 18px; margin-top: 10px; }
+.profile-info { margin-top: 30px; text-align: center; font-size: 16px; color: #79D7E8; }
+.profile-info span { color: #FFF4DC; }
+.stats { width: 100%; max-width: 550px; margin-top: 30px; }
+.stat { margin-bottom: 20px; }
+.stat p { margin: 0 0 8px 0; font-size: 13px; color: #AAB6D8; letter-spacing: 1px; }
+.bar { width: 100%; height: 20px; background: #99b3ff; border: 2px solid #79D7E8; }
+.fill { height: 100%; background: #07237a; }
+.fatherhood { width: 100%; }.renovation { width: 80%; }.football { width: 45%; }.dad-jokes { width: 70%; }.staying-young { width: 80%; }
+.special { margin-top: 30px; width: 100%; max-width: 550px; padding: 20px; border: 2px solid #AAB6D8; background: #07163f; text-align: center; }
+.special h3 { margin: 10px 0; font-size: 22px; color: #6ee7ff; }
+.special p:last-child { font-size: 13px; color: #7184C0; }
+.back-button { margin-top: 30px; background: #c5d0e4; color: #38539A; border: 2px solid #79D7E8; padding: 12px 40px; cursor: pointer; font-size: 14px; }
+
+/* ========================= VILÁG TÉRKÉP ========================= */
+.missions-screen { max-width: 1100px; min-height: 750px; }
+.map-header { display: flex; justify-content: space-between; width: 100%; border-bottom: 2px solid #444; padding-bottom: 15px; }
+.map-header h1 { font-size: 40px; }
+.world-map { position: relative; width: 100%; height: 500px; margin-top: 20px; border: 4px solid #444; background: #171d35; overflow: hidden; }
+.location { position: absolute; width: 200px; padding: 15px; background: #202a52; border: 2px solid #6675b0; color: #eee; cursor: pointer; display: flex; flex-direction: column; align-items: center; }
+.location:hover { border-color: #6ee7ff; background: #30437e; transform: translateY(-4px); }
+.location-icon { font-size: 40px; }
+.location-name { font-size: 11px; text-align: center; margin-top: 6px; font-weight: bold; }
+.location-status { font-size: 10px; color: #6ee7ff; margin-top: 6px; }
+.renovation-location { top: 50px; left: 60px; }
+.football-location { top: 50px; right: 60px; }
+.disco-location { top: 200px; left: 50%; transform: translateX(-50%); }
+.apes-location { bottom: 50px; left: 60px; }
+.warzone-location { bottom: 50px; right: 60px; }
+.map-footer { display: flex; justify-content: space-between; width: 100%; margin-top: 25px; }
+.map-footer p { font-size: 14px; color: #ccc; }
+.map-back-button { font-size: 14px; padding: 10px 25px; background: #191b1f; color: #eee; border: 2px solid #555; cursor: pointer; }
+
+/* =========================================================
+   ALLIANZ ARENA - RETRO 8-BIT SUPER TURBO ENGINE (FIXED)
+   ========================================================= */
+.football-screen * {
+    font-family: 'Press Start 2P', monospace !important;
+    box-sizing: border-box;
+}
+
+.football-screen {
+    width: 100%; max-width: 1200px; min-height: 800px; background: #0b101d;
+    border: 10px solid #ffffff; box-shadow: 0 0 0 10px #000, inset 0 0 0 8px #151e36;
+    position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px;
+}
+
+.player-select-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; text-align: center; }
+.select-header-block { margin-bottom: 40px; }
+.player-select-screen h1 { font-size: 42px; color: #ffff00; text-shadow: 4px 4px 0px #000; margin: 15px 0; }
+.select-subtitle { color: #6ee7ff; font-size: 14px; letter-spacing: 2px; }
+.players-grid-wrapper { display: flex; flex-direction: column; align-items: center; width: 100%; }
+.players { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; width: 100%; max-width: 1100px; margin-bottom: 40px; }
+.player-card { min-height: 240px; background: #1b2542; color: white; border: 5px solid #000; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-shadow: inset -4px -4px 0px #0d1527, inset 4px 4px 0px #34487a; }
+.player-card:hover { background: #2a3b69; border-color: #6ee7ff; transform: scale(1.05); box-shadow: 0 0 15px #6ee7ff; }
+
+/* CRISP ORIGINAL JÁTÉKOS EMOJI */
+.pixel-player { font-size: 70px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; image-rendering: auto !important; filter: drop-shadow(0 6px 0 rgba(0,0,0,0.4)); }
+.player-name { font-size: 10px; text-shadow: 2px 2px #000; font-weight: bold; } 
+.player-number { font-size: 9px; color: #a2aab8; margin-top: 5px; }
+
+.shooting-screen { width: 100%; }
+.shooting-game-layout { display: grid; grid-template-columns: 320px 1fr 280px; align-items: center; gap: 30px; width: 100%; }
+.shooting-sidebar-left { display: flex; flex-direction: column; justify-content: center; text-align: left; background: #111625; border: 4px solid #000; padding: 25px; border-radius: 4px; box-shadow: inset -4px -4px 0px #080b13, inset 4px 4px 0px #222b45; }
+.shooting-sidebar-left h1 { font-size: 24px; color: #ffffff; text-shadow: 3px 3px 0px #4169E1; line-height: 1.3; margin: 10px 0 20px 0; }
+.shot-counter { font-size: 13px; color: #ff3e6c; letter-spacing: 1px; margin-top: 15px; }
+.shot-counter strong { font-size: 46px; color: #ffff00; text-shadow: 4px 4px 0 #000; display: block; margin-top: 8px; }
+.selected-player { font-size: 13px; color: #a2aab8; letter-spacing: 1px; margin-top: 25px; }
+.selected-player strong { color: #00ffff; font-size: 22px; text-shadow: 2px 2px 0 #000; display: block; margin-top: 8px; }
+
+.shooting-center-field { display: flex; justify-content: center; width: 100%; }
+.football-field { position: relative; width: 580px; height: 480px; border: 8px solid #000; background: repeating-linear-gradient(90deg, #18381a 0px, #18381a 45px, #1d4220 45px, #1d4220 90px); box-shadow: 0 10px 0 rgba(0,0,0,0.3); }
+.crowd { width: 100%; height: 48px; background: #06070a; color: #ff2255; font-size: 14px; padding: 16px 10px; text-align: center; font-weight: bold; letter-spacing: 2px; border-bottom: 6px solid #000; text-shadow: 3px 3px 0px #000000; animation: crowd-flicker 0.5s infinite alternate steps(2); }
+@keyframes crowd-flicker { 0% { color: #ff2255; } 100% { color: #ffff00; } }
+.goal { position: absolute; top: 95px; left: 50%; transform: translateX(-50%); width: 480px; height: 220px; border: 10px solid #fff; border-bottom: none; background-color: rgba(0, 0, 0, 0.5); background-image: linear-gradient(rgba(255,255,255,0.15) 3px, transparent 3px), linear-gradient(90deg, rgba(255,255,255,0.15) 3px, transparent 3px); background-size: 16px 16px; }
+
+/* CRISP ORIGINAL GOALKEEPER EMOJI (🕴️) */
+.goalkeeper { 
+    position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); font-size: 85px; 
+    width: auto; height: auto; z-index: 6; background: transparent !important; border: none !important; box-shadow: none !important;
+    image-rendering: auto !important; filter: drop-shadow(0px 8px 0px rgba(0,0,0,0.5));
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), left 0.25s ease-out; 
+}
+.goalkeeper::before, .goalkeeper::after { content: none !important; }
+.goalkeeper.dive-left { left: 20%; transform: translateX(-50%) rotate(-35deg) scale(1.1); }
+.goalkeeper.dive-right { left: 80%; transform: translateX(-50%) rotate(35deg) scale(1.1); }
+.goalkeeper.dive-middle { left: 50%; transform: translateX(-50%) translateY(-65px) scale(1.05); }
+
+/* ALAP TARGET OSZTÁLY HELYREÁLLÍTÁSA (EZ HIÁNYZOTT!) */
+.target { 
+    position: absolute; 
+    width: 55px; 
+    height: 55px; 
+    z-index: 7; 
+    cursor: crosshair; 
+    border: 5px dashed #00ffff; 
+    box-shadow: 0 0 10px #00ffff; 
+    background: rgba(0, 255, 255, 0.05); 
+}
+.target:hover { 
+    border-color: #ff00ff; 
+    background: rgba(255, 0, 255, 0.25); 
+    box-shadow: 0 0 15px #ff00ff; 
+    transform: scale(1.1); 
+}
+
+/* FIXÁLT CÉLKERESZT KOORDINÁTÁK */
+.target-1 { top: 15px; left: 15px; }
+.target-2 { top: 15px; left: 50%; transform: translateX(-50%); }
+.target-2:hover { transform: translateX(-50%) scale(1.1); }
+.target-3 { top: 15px; right: 15px; } 
+.target-4 { bottom: 15px; left: 15px; }
+.target-5 { bottom: 15px; right: 15px; }
+
+
+/* BALL RETRO EMOJI */
+.ball { 
+    position: absolute; 
+    bottom: 35px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    font-size: 55px; 
+    width: auto; 
+    height: auto; 
+    border-radius: 0; 
+    background: transparent; 
+    border: none; 
+    background-image: none; 
+    z-index: 10; 
+    filter: drop-shadow(0 6px 0 #000); 
+    transition: left 0.38s ease-in-out, bottom 0.38s ease-in-out, transform 0.38s ease-in-out; 
+}
+.ball.kicking { 
+    transform: translateX(-50%) scale(0.4) rotate(540deg); 
+}
+
+/* JOBB OLDALI PANEL: ÜZENŐFAL */
+.shot-message { 
+    text-align: center; 
+    font-size: 15px; 
+    color: #fff; 
+    background: #111625; 
+    padding: 25px 15px; 
+    border: 4px solid #34487a; 
+    text-shadow: 2px 2px #000; 
+    width: 100%; 
+    min-height: 140px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    line-height: 1.6; 
+    box-shadow: inset -4px -4px 0px #080b13, inset 4px 4px 0px #222b45, 0 6px 0 rgba(0,0,0,0.3); 
+}
+
+/* GOMBOK ÉS KIJELZŐK */
+.football-back-button { 
+    margin-top: 15px; 
+    width: 340px; 
+}
+.football-back-button, .result-map-button { 
+    background: #ff3e6c; 
+    color: #fff; 
+    border: 4px solid #000; 
+    padding: 16px 20px; 
+    cursor: pointer; 
+    font-size: 12px; 
+    box-shadow: inset -4px -4px 0px #9e0024, inset 4px 4px 0px #ff809d; 
+    text-align: center; 
+}
+.football-back-button:hover, .result-map-button:hover { 
+    background: #ff527c; 
+    box-shadow: inset -4px -4px 0px #9e0024, inset 4px 4px 0px #ffb3c4, 0 0 0 4px #fff; 
+}
+
+/* VÉGEREDMÉNY BLOKK */
+.football-result { 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+}
+#football-result-score { 
+    font-size: 55px; 
+    color: #00ff00; 
+    text-shadow: 4px 4px 0 #000; 
+    margin: 20px 0; 
+}
+#football-result-text { 
+    font-size: 16px; 
+    color: #fff; 
+    line-height: 1.6; 
+}
+
+/* FC BAYERN RETRO LOGO DESIGN */
+.bayern-logo-arcade { 
+    width: 90px; 
+    height: 90px; 
+    margin: 15px auto 25px auto; 
+    border-radius: 50%; 
+    background: #c60028; 
+    border: 6px solid #000000; 
+    position: relative; 
+    box-shadow: 0 6px 0 rgba(0,0,0,0.3); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    overflow: hidden; 
+}
+.bayern-logo-arcade::before { 
+    content: ""; 
+    position: absolute; 
+    width: 62px; 
+    height: 62px; 
+    border-radius: 50%; 
+    border: 4px dashed #ffffff; 
+    z-index: 1; 
+}
+.bayern-logo-arcade::after { 
+    content: ""; 
+    position: absolute; 
+    width: 42px; 
+    height: 42px; 
+    border-radius: 50%; 
+    border: 4px solid #000000; 
+    background: #ffffff; 
+    background-image: linear-gradient(45deg, #0066b2 25%, transparent 25%, transparent 75%, #0066b2 75%, #0066b2), linear-gradient(45deg, #0066b2 25%, transparent 25%, transparent 75%, #0066b2 75%, #0066b2); 
+    background-size: 14px 14px; 
+    background-position: 0 0, 7px 7px; 
+    z-index: 2; 
+}
+
+/* =========================================================
+   RENOVATION ALLIANCE - BOMBABIZTOS JÁTÉKTÉR STÍLUSOK
+   ========================================================= */
+.renovation-screen * { 
+    font-family: 'Press Start 2P', monospace !important; 
+    box-sizing: border-box; 
+}
+
+.renovation-screen { 
+    width: 100%; 
+    max-width: 1200px; 
+    min-height: 800px; 
+    background: #141013; 
+    border: 10px solid #ffffff; 
+    box-shadow: 0 0 0 10px #000, inset 0 0 0 8px #2b2228; 
+    position: relative; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 40px; 
+}
+
+.renovation-layout { 
+    display: grid; 
+    grid-template-columns: 340px 1fr 240px; 
+    align-items: center; 
+    gap: 30px; 
+    width: 100%; 
+}
+
+.renovation-sidebar-left { 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    text-align: left; 
+    background: #1f181d; 
+    border: 4px solid #000; 
+    padding: 25px; 
+    border-radius: 4px; 
+    box-shadow: inset -4px -4px 0px #120e11, inset 4px 4px 0px #3a2e37; 
+}
+
+.renovation-small-title { font-size: 12px; color: #ffbc42; text-shadow: 2px 2px #000; margin-bottom: 10px; }
+.renovation-sidebar-left h1 { font-size: 22px; color: #ffffff; text-shadow: 3px 3px 0px #d81159; line-height: 1.4; margin: 10px 0 20px 0; }
+.build-counter { font-size: 13px; color: #00ffcc; letter-spacing: 1px; }
+.build-counter strong { font-size: 46px; color: #ffff00; text-shadow: 4px 4px 0 #000; display: block; margin-top: 8px; }
+.renovation-message { text-align: center; font-size: 14px; color: #fff; background: #000; padding: 20px 15px; border: 4px solid #ffbc42; text-shadow: 2px 2px #000; width: 100%; line-height: 1.6; margin-top: 20px; box-shadow: inset -4px -4px 0px #000; }
+
+/* KÖZÉPSŐ PANEL - A KÉK ÉPÍTÉSI TERÜLET */
+.renovation-center-field { 
+    display: flex; 
+    justify-content: center; 
+    width: 100%; 
+}
+
+.construction-yard { 
+    position: relative; 
+    width: 580px; 
+    height: 520px; 
+    min-height: 520px;
+    border: 8px solid #000; 
+    background: #2b3a4a; 
+    box-shadow: 0 10px 0 rgba(0,0,0,0.3); 
+    padding: 20px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: flex-end; 
+}
+
+.sky-background { 
+    position: absolute; 
+    top: 20px; 
+    font-size: 24px; 
+    color: rgba(255,255,255,0.2); 
+    letter-spacing: 20px; 
+    pointer-events: none; 
+}
+
+/* A HÁZ HELYE */
+.house-container { 
+    width: 280px; 
+    height: 260px; 
+    min-height: 260px;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-end; 
+    align-items: center; 
+    margin-bottom: 20px; 
+}
+
+.house-part { width: 100%; display: none; border: 5px solid #000000; }
+.base-part { height: 65px; background: #e3d3b4; }
+.middle-part { height: 75px; background: #e3d3b4; border-bottom: none; position: relative; }
+.middle-part::before { content: ""; position: absolute; top: 12px; left: 30px; width: 50px; height: 45px; background: #543d2b; border: 4px solid #ffffff; box-shadow: 0 0 0 4px #000000; }
+.top-part { height: 75px; background: #e3d3b4; border-bottom: none; position: relative; }
+.top-part::before { content: ""; position: absolute; top: 12px; right: 30px; width: 50px; height: 45px; background: #543d2b; border: 4px solid #ffffff; box-shadow: 0 0 0 4px #000000; }
+.roof-part { height: 65px; background: #40322d; width: 310px; clip-path: polygon(50% 0%, 0% 100%, 100% 100%); border-bottom: 5px solid #000000; }
+
+/* FIXÁLT IDŐZÍTŐ SÁV ÉS BELSŐ ZÓNÁK (GARANTÁLT MAGASSÁGGAL ÉS SZÉLESSÉGGEL) */
+.timing-bar-container { 
+    width: 100%; 
+    height: 45px; 
+    min-height: 45px;
+    background: #000000; 
+    border: 4px solid #ffffff; 
+    display: flex; 
+    position: relative; 
+    overflow: hidden; 
+    margin-bottom: 20px; 
+}
+
+.zone { 
+    height: 100%; 
+    display: block;
+}
+.zone-fail-left { width: 40%; background: #441118; }
+.zone-success { width: 20%; background: #00ff66; box-shadow: 0 0 15px #00ff66; }
+.zone-fail-right { width: 40%; background: #441118; }
+
+/* A SÁRGA MOZGÓ CSÚSZKA FIX MÉRETE */
+.timing-indicator { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 16px; 
+    height: 100%; 
+    background: #ffff00 !important; 
+    border: 3px solid #000000; 
+    box-shadow: 0 0 10px #ffff00; 
+    z-index: 5;
+}
+
+/* FIXÁLT KALAPÁCS GOMB */
+.hammer-button { 
+    width: 100%; 
+    height: 55px;
+    min-height: 55px;
+    background: #ffbc42 !important; 
+    color: #000000 !important; 
+    border: 4px solid #000000; 
+    padding: 12px; 
+    font-size: 14px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    box-shadow: inset -4px -4px 0 #b07d1b, inset 4px 4px 0 #ffe094; 
+    display: block;
+}
+.hammer-button:active { transform: scale(0.98); }
+
+.renovation-back-button, .reno-result-map-button { background: #d81159; color: #fff; border: 4px solid #000; padding: 15px 20px; cursor: pointer; font-size: 11px; box-shadow: inset -4px -4px 0px #800530, inset 4px 4px 0px #ff6699; text-shadow: 2px 2px #000; text-align: center; }
+.renovation-back-button:hover, .reno-result-map-button:hover { background: #ff2a75; }
+
+.renovation-result { position: absolute; inset: 0; background: #141013; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 20; padding: 40px; }
+.success-badge { font-size: 32px; color: #00ffcc; margin: 20px 0; text-shadow: 3px 3px 0 #000; }
+#reno-result-text { font-size: 14px; color: #a2aab8; margin-bottom: 30px; }
+/* =========================================================
+   PLANET OF THE APES - RETRO JUNGLE CONFIG
+   ========================================================= */
+.apes-screen * {
+    font-family: 'Press Start 2P', monospace !important;
+    box-sizing: border-box;
+}
+
+.apes-screen {
+    width: 100%; max-width: 1200px; min-height: 800px; background: #081a14;
+    border: 10px solid #ffffff; box-shadow: 0 0 0 10px #000, inset 0 0 0 8px #102e23;
+    position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px;
+}
+
+.apes-layout {
+    display: grid; grid-template-columns: 320px 1fr 240px; align-items: center; gap: 30px; width: 100%;
+}
+
+.apes-sidebar-left {
+    display: flex; flex-direction: column; justify-content: center; text-align: left;
+    background: #0f2720; border: 4px solid #000; padding: 25px; border-radius: 4px;
+    box-shadow: inset -4px -4px 0px #081713, inset 4px 4px 0px #1a4235;
+}
+
+.apes-small-title { font-size: 12px; color: #a3e635; text-shadow: 2px 2px #000; margin-bottom: 10px; }
+.apes-sidebar-left h1 { font-size: 22px; color: #ffffff; text-shadow: 3px 3px 0px #15803d; line-height: 1.4; margin: 10px 0 20px 0; }
+.apes-hud-item { font-size: 12px; color: #a2aab8; letter-spacing: 1px; }
+.apes-hud-item strong { font-size: 34px; color: #ffff00; text-shadow: 4px 4px 0 #000; display: block; margin-top: 8px; }
+.apes-message { text-align: center; font-size: 14px; color: #fff; background: #000; padding: 20px 15px; border: 4px solid #a3e635; text-shadow: 2px 2px #000; width: 100%; line-height: 1.6; margin-top: 20px; box-shadow: inset -4px -4px 0px #000; }
+
+/* DZSONGEL JÁTÉKTÉR PANEL */
+.apes-center-field { display: flex; justify-content: center; width: 100%; }
+.jungle-yard {
+    position: relative; width: 580px; height: 520px; border: 8px solid #000;
+    background: #143826; box-shadow: 0 10px 0 rgba(0,0,0,0.3); overflow: hidden;
+}
+
+/* Majmok lombkoronája a pálya tetején */
+.jungle-canopy {
+    width: 100%; height: 55px; background: #092416; font-size: 24px; padding: 12px;
+    text-align: center; letter-spacing: 20px; border-bottom: 5px solid #000;
+    text-shadow: 0 4px 0 #000;
+}
+
+/* KOSÁR JÁTÉKOS MOZGATÁSA */
+.basket-player {
+    position: absolute; bottom: 85px; left: 50%; transform: translateX(-50%);
+    font-size: 60px; z-index: 10; width: 70px; height: 70px; display: flex;
+    align-items: center; justify-content: center; filter: drop-shadow(0 6px 0 rgba(0,0,0,0.4));
+    transition: left 0.08s ease-out; /* Sima és reszponzív mozgásért */
+}
+
+/* POTYOGÓ GYÜMÖLCSÖK (BANÁN ÉS KÓKUSZ) */
+.falling-fruit {
+    position: absolute; font-size: 45px; width: 50px; height: 50px;
+    display: flex; align-items: center; justify-content: center;
+    filter: drop-shadow(0 4px 0 rgba(0,0,0,0.5));
+}
+
+/* +200-AS ÚJ SZUPER ARANY BANÁN EFFEKT */
+.gold-banana {
+    filter: drop-shadow(0 0 12px #ffdf00) drop-shadow(0 4px 0 #000);
+    animation: gold-shimmer 0.2s infinite alternate;
+}
+@keyframes gold-shimmer {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.2); }
+}
+
+/* NYILAS ARCADE ALSÓ GOMBOK (EGÉRVÁLASZTÁSHOZ) */
+.apes-controls {
+    position: absolute; bottom: 10px; width: 100%; display: flex; justify-content: center; gap: 40px; pointer-events: auto;
+}
+.arrow-btn {
+    width: 70px; height: 50px; background: #a3e635; color: #000; font-size: 24px;
+    font-weight: bold; border: 4px solid #000; cursor: pointer; box-shadow: inset -4px -4px 0 #65a30d;
+}
+.arrow-btn:active { transform: scale(0.95); }
+
+.apes-back-button, .apes-result-map-button {
+    background: #15803d; color: #fff; border: 4px solid #000; padding: 15px 20px;
+    cursor: pointer; font-size: 11px; box-shadow: inset -4px -4px 0px #064e3b, inset 4px 4px 0px #22c55e; text-shadow: 2px 2px #000; text-align: center;
+}
+.apes-back-button:hover, .apes-result-map-button:hover { background: #16a34a; }
+
+/* JÁTÉK VÉGE */
+.apes-result {
+    position: absolute; inset: 0; background: #081a14; display: flex;
+    flex-direction: column; align-items: center; justify-content: center; z-index: 25; padding: 40px;
+}
+#apes-result-text { font-size: 14px; color: #a2aab8; margin-bottom: 30px; text-align: center; line-height: 1.6; }
+/* =========================================================
+   WARZONE - MEGA LARGE FONTS & AUTO-STRETCH LAYOUT
+   ========================================================= */
+.warzone-screen * { 
+    font-family: 'Press Start 2P', monospace !important; 
+    box-sizing: border-box; 
+}
+.warzone-screen { 
+    width: 100%; max-width: 1300px; min-height: 900px; background: #241411; 
+    border: 10px solid #ffffff; box-shadow: 0 0 0 10px #000, inset 0 0 0 8px #3a1c17; 
+    position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; 
+}
+.warzone-layout { display: grid; grid-template-columns: 340px 1fr 200px; align-items: center; gap: 30px; width: 100%; }
+.warzone-sidebar-left { display: flex; flex-direction: column; justify-content: center; text-align: left; background: #3a1814; border: 4px solid #000; padding: 25px; border-radius: 4px; box-shadow: inset -4px -4px 0px #1e0b09, inset 4px 4px 0px #5c2722; }
+
+.wz-main-title { font-size: 26px !important; color: #ffffff; text-shadow: 3px 3px 0px #991b1b; line-height: 1.4; margin: 10px 0 20px 0; }
+.wz-huge-counter { font-size: 50px !important; color: #ffff00; text-shadow: 4px 4px 0 #000; display: block; margin-top: 12px; }
+.warzone-message { text-align: center; font-size: 15px; color: #fff; background: #000; padding: 20px 15px; border: 4px solid #ff5533; text-shadow: 2px 2px #000; width: 100%; line-height: 1.6; margin-top: 25px; box-shadow: inset -4px -4px 0px #000; }
+
+/* NAGYÍTOTT MECCSPANEL */
+.matchmaking-board {
+    display: grid; grid-template-columns: 1fr 1fr; padding: 25px; gap: 25px;
+    width: 660px; height: 680px; border: 8px solid #000; background: #3b281b; box-shadow: 0 10px 0 rgba(0,0,0,0.3);
+}
+.match-column { display: flex; flex-direction: column; gap: 15px; height: 100%; justify-content: space-between; }
+
+/* MEGNÖVELT DOBOZOK */
+.match-node {
+    background: #211511; border: 4px solid #000; border-radius: 4px; padding: 12px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    box-shadow: inset -3px -3px 0 #120b09, inset 3px 3px 0 #4a2e26; width: 100%; height: 135px; /* Magasság megemelve 135px-re */
+    position: relative;
+}
+
+.item-node { cursor: grab; background: #2a1f1a; }
+.item-node:active { cursor: grabbing; opacity: 0.6; }
+.item-node:hover { border-color: #ffbc42; background: #382921; }
+
+.char-node.drag-over { border-color: #00ff00 !important; background: #143d22 !important; box-shadow: 0 0 15px #00ff00; }
+.char-node.satisfied { border-color: #00ffcc !important; background: #102e3b !important; opacity: 0.8; }
+
+.char-avatar, .item-icon { font-size: 42px !important; filter: drop-shadow(0 4px 0 #000); } /* Ikonok felnagyítva */
+.char-name-label, .item-label { font-size: 13px !important; color: #fff; margin-top: 8px; font-weight: bold; text-align: center; letter-spacing: 1px; } /* Szövegek felnagyítva */
+
+/* MEGNÖVELT BUBORÉK SZÖVEGEK */
+.wz-demand-bubble {
+    font-size: 11px !important; font-weight: bold; background: #000; color: #ffff00; border: 2px solid #fff;
+    padding: 6px 4px; border-radius: 4px; margin-top: 8px; width: 100%; text-align: center;
+}
+.char-node.satisfied .wz-demand-bubble { color: #00ffcc; border-color: #00ffcc; }
+
+.warzone-back-button, .warzone-result-map-button { background: #991b1b; color: #fff; border: 4px solid #000; padding: 18px 25px; cursor: pointer; font-size: 13px; box-shadow: inset -4px -4px 0px #450a0a, inset 4px 4px 0px #ef4444; text-shadow: 2px 2px #000; text-align: center; }
+.warzone-back-button:hover, .warzone-result-map-button:hover { background: #b91c1c; }
+.warzone-result { position: absolute; inset: 0; background: #241411; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 30; padding: 40px; }
+#warzone-result-text { font-size: 16px; color: #a2aab8; margin-bottom: 30px; text-align: center; line-height: 1.6; }
+/* =========================================================
+   DISCO ROOM - MEGA NEON SHIMMER & STRETCH LAYOUT
+   ========================================================= */
+.disco-screen * { 
+    font-family: 'Press Start 2P', monospace !important; 
+    box-sizing: border-box; 
+}
+.disco-screen { 
+    width: 100%; max-width: 1300px; min-height: 900px; 
+    background: radial-gradient(circle, #12092b 0%, #050312 100%); 
+    border: 10px solid #ffffff; box-shadow: 0 0 30px #ff00ff, inset 0 0 20px #00ffff; 
+    position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; 
+}
+.disco-layout { display: grid; grid-template-columns: 340px 1fr 200px; align-items: center; gap: 30px; width: 100%; }
+.disco-sidebar-left { display: flex; flex-direction: column; justify-content: center; text-align: left; background: #0e0720; border: 4px solid #fff; padding: 25px; border-radius: 4px; box-shadow: 0 0 15px #ff00ff; }
+
+.disco-small-title { font-size: 13px; color: #ff00ff; text-shadow: 2px 2px #000; margin-bottom: 12px; }
+.disco-main-title { font-size: 26px !important; color: #ffffff; text-shadow: 3px 3px 0px #4d0099; line-height: 1.4; margin: 10px 0 20px 0; }
+.disco-huge-counter { font-size: 50px !important; color: #00ffff; text-shadow: 4px 4px 0 #000; display: block; margin-top: 12px; animation: neon-flicker 1.5s infinite alternate; }
+.disco-message { text-align: center; font-size: 14px; color: #fff; background: #000; padding: 20px 15px; border: 4px solid #00ffff; text-shadow: 2px 2px #000; width: 100%; line-height: 1.6; margin-top: 25px; box-shadow: 0 0 10px #00ffff; }
+
+/* KÖZÉPSŐ JÁTÉKTÉR PANEL */
+.visualizer-yard { 
+    width: 660px; height: 680px; border: 6px solid #fff; background: #130b2b; 
+    padding: 25px; display: flex; flex-direction: column; gap: 25px; box-shadow: 0 0 25px rgba(255, 0, 255, 0.4); 
+}
+
+/* LEJÁTSZÓ ELRENDEZÉS ÉS CSILOGÓ HANGHULLÁM */
+.audio-player-block {
+    width: 100%; height: 130px; background: #000000; border: 4px solid #00ffff; padding: 20px;
+    display: flex; align-items: center; gap: 20px; border-radius: 4px; box-shadow: 0 0 15px #00ffff;
+}
+.disco-play-btn {
+    width: 75px; height: 75px; min-width: 75px; border-radius: 50%; background: #ffffff; color: #000000;
+    font-size: 36px; font-weight: bold; border: 4px solid #000; cursor: pointer; display: flex; align-items: center; justify-content: center; padding-left: 8px; box-shadow: 0 0 10px #fff;
+}
+.disco-play-btn:hover { background: #ff00ff; color: #fff; border-color: #fff; box-shadow: 0 0 15px #ff00ff; }
+
+/* FORGÓ DISZKÓGÖMB ANIMÁCIÓ */
+.disco-ball-animation { font-size: 45px; animation: ball-spin 2s infinite linear; text-shadow: 0 0 10px #fff; }
+@keyframes ball-spin { 0% { transform: rotate(0deg) scale(1); } 50% { transform: rotate(180deg) scale(1.1); } 100% { transform: rotate(360deg) scale(1); } }
+
+.retro-waveform { display: flex; align-items: center; gap: 6px; width: 100%; height: 100%; justify-content: center; }
+.wave-bar { width: 10px; height: 25px; background: #331a5e; border-radius: 2px; transition: height 0.1s, background-color 0.1s; }
+
+/* Ha fut a zene, a hullámok száguldanak és izzanak */
+.retro-waveform.playing .wave-bar { animation: wave-pulse 0.35s infinite alternate ease-in-out; }
+.retro-waveform.playing .wave-bar:nth-child(2n) { animation-delay: 0.1s; }
+.retro-waveform.playing .wave-bar:nth-child(3n) { animation-delay: 0.2s; }
+@keyframes wave-pulse { 0% { height: 15px; background: #ff00ff; box-shadow: 0 0 5px #ff00ff; } 100% { height: 80px; background: #00ffff; box-shadow: 0 0 10px #00ffff; } }
+
+/* MEGNÖVELT ALBUM KÁRTYÁK RÁCSA */
+.album-covers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; height: 100%; overflow-y: auto; }
+.album-card-node {
+    background: #090514; border: 4px solid #fff; padding: 15px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; cursor: pointer; text-align: center;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.1); height: 215px; border-radius: 4px;
+}
+.album-card-node:hover { border-color: #ff00ff; background: #190e38; transform: translateY(-4px); box-shadow: 0 0 15px #ff00ff; }
+
+.album-mock-cover { font-size: 55px !important; filter: drop-shadow(0 4px 0 #000); margin-bottom: 12px; }
+.album-title-label { font-size: 12px !important; color: #ffffff; font-weight: bold; line-height: 1.5; letter-spacing: 1px; text-shadow: 2px 2px #000; }
+
+/* NAVIGÁCIÓS GOMBOK */
+.disco-back-button, .disco-result-map-button { background: #4d0099; color: #fff; border: 4px solid #fff; padding: 18px 25px; cursor: pointer; font-size: 13px; box-shadow: 0 0 15px #4d0099; text-shadow: 2px 2px #000; text-align: center; }
+.disco-back-button:hover, .disco-result-map-button:hover { background: #ff00ff; box-shadow: 0 0 20px #ff00ff; }
+.disco-result { position: absolute; inset: 0; background: #0c081c; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 35; padding: 40px; border: 10px solid #ff00ff; }
+
+@keyframes neon-flicker { 0% { opacity: 0.8; text-shadow: 0 0 10px #00ffff; } 100% { opacity: 1; text-shadow: 0 0 25px #00ffff; } }
+/* =========================================================
+   RETRO PIXEL CONFETTI CELEBRATION EFFECT
+   ========================================================= */
+.wz-confetti {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    z-index: 999;
+    pointer-events: none;
+    animation: confetti-fall 2.5s linear forwards;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+/* =========================================================
+   ACHIEVEMENTS SCREEN - RETRO TROPHY ROOM STYLE
+   ========================================================= */
+.achievements-screen {
+    width: 100%; max-width: 900px; min-height: 700px; border: 4px solid #ffbc42; background: #1c150c;
+    display: none; /* A JavaScript fogja flex-re állítani nyitáskor */
+    flex-direction: column; align-items: center; justify-content: center; padding: 40px;
+    box-shadow: inset 0 0 0 10px #100b05, 0 0 25px rgba(255, 188, 66, 0.3);
+    margin: 0 auto;
+}
+
+.achievements-small-title { font-size: 11px; color: #a2aab8; letter-spacing: 2px; margin-bottom: 10px; }
+.achievements-subtitle { font-size: 14px; color: #ffbc42; margin-top: 10px; margin-bottom: 30px; letter-spacing: 1px; }
+
+.achievements-grid { width: 100%; max-width: 700px; display: flex; flex-direction: column; gap: 15px; }
+
+/* Trófea kártyák táguló elrendezése */
+.achievement-card {
+    display: flex; align-items: center; background: #261b11; border: 3px solid #4a341e;
+    padding: 15px 20px; gap: 20px; border-radius: 4px; box-shadow: inset -3px -3px 0 #18110a;
+}
+.ach-icon { font-size: 36px; min-width: 50px; text-align: center; filter: drop-shadow(0 3px 0 #000); }
+.ach-info { display: flex; flex-direction: column; text-align: left; }
+.ach-info h3 { margin: 0; font-size: 13px; color: #ffffff; letter-spacing: 1px; }
+.ach-info p { margin: 6px 0 0 0; font-size: 10px; color: #a2aab8; line-height: 1.4; }
+
+/* Feloldott trófea ragyogása */
+.achievement-card.unlocked { border-color: #ffbc42; box-shadow: 0 0 12px rgba(255, 188, 66, 0.25); background: #382413; }
+.achievement-card.unlocked h3 { color: #ffbc42; text-shadow: 2px 2px #000; }
+
+/* Lezárt trófea szürkesége */
+.achievement-card.locked { opacity: 0.5; background: #1a1510; border-color: #333; }
+.achievement-card.locked h3 { color: #888; }
+
+.achievements-back-button {
+    margin-top: 35px; background: #ffbc42; color: #000000; border: 3px solid #000;
+    padding: 14px 40px; cursor: pointer; font-size: 14px; font-weight: bold;
+    box-shadow: inset -4px -4px 0 #b07d1b, inset 4px 4px 0 #ffe094;
+}
+.achievements-back-button:hover { background: #ffd073; }
+/* =========================================================
+   NEON BIRTHDAY BANNER TEXT ANIMATION
+   ========================================================= */
+@keyframes text-shake {
+    0% { transform: scale(1) rotate(-1deg); color: #ff00ff; text-shadow: 0 0 15px #00ffff; }
+    100% { transform: scale(1.05) rotate(1deg); color: #00ffff; text-shadow: 0 0 15px #ff00ff; }
+}
+

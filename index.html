@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APA: LEGENDÁS KIADÁS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="game">
+
+    <!-- ========================= MAIN MENU ========================= -->
+    <div class="menu-screen">
+        <p class="company">KÁRAI CSALÁD JÁTÉKKONZOL</p>
+        <h1>APA</h1>
+        <h2>LEGENDÁS KIADÁS</h2>
+        <div class="menu">
+            <button class="mission-button">KÜLDETÉSEK</button>
+            <button class="profile-button">PROFIL</button>
+            <button class="achievements-button">EREDMÉNYEK</button>
+        </div>
+        <div class="status">
+            <p>KOR: 44</p>
+            <p>STÁTUSZ: HALADÁS AZ 50 FELÉ!!!</p>
+            <p>"SOSE HALUNK MEG."</p>
+        </div>
+        <p class="year">2026</p>
+    </div>
+
+    <!-- ========================= PROFILE SCREEN ========================= -->
+    <div class="profile-screen" style="display: none;">
+        <p class="profile-title">JÁTÉKOS PROFIL</p>
+        <h1>APA</h1>
+        <p class="profile-level">LEVEL 44</p>
+        <div class="profile-info">
+            <p>SZINT: <span>APA</span></p>
+            <p>SZÖVETSÉG: <span>CSALÁD</span></p>
+        </div>
+        <div class="stats">
+            <div class="stat">
+                <p>APASÁG</p>
+                <div class="bar"><div class="fill fatherhood"></div></div>
+            </div>
+            <div class="stat">
+                <p>DOLGOK FELÚJÍTÁSA</p>
+                <div class="bar"><div class="fill renovation"></div></div>
+            </div>
+            <div class="stat">
+                <p>FOCI</p>
+                <div class="bar"><div class="fill football"></div></div>
+            </div>
+            <div class="stat">
+                <p>FÁRASZTÓ VICCEK</p>
+                <div class="bar"><div class="fill dad-jokes"></div></div>
+            </div>
+            <div class="stat">
+                <p>ÖRÖK FIATALSÁG</p>
+                <div class="bar"><div class="fill staying-young"></div></div>
+            </div>
+        </div>
+        <div class="special">
+            <p>SPECIÁLIS KÉPESSÉG</p>
+            <h3>VÁGOD CSÓTÁNY?</h3>
+            <p>Minden szituációt kb. 73%-kal legendásabbá tesz.</p>
+        </div>
+        <button class="back-button">← VISSZA</button>
+    </div>
+
+    <!-- ========================= MISSIONS / WORLD MAP ========================= -->
+    <div class="missions-screen" style="display: none;">
+        <div class="map-header">
+            <div>
+                <p class="map-small-title">APA: LEGENDARY EDITION</p>
+                <h1>VILÁG TÉRKÉP</h1>
+            </div>
+            <div class="mission-progress">
+                KÜLDETÉSEK TELJESÍTÉSE:
+                <strong><span id="completed-count">0</span>/5</strong>
+            </div>
+        </div>
+        <div class="world-map">
+            <button class="location renovation-location">
+                <span class="location-icon">🛠️</span>
+                <span class="location-name">FELÚJÍTÁSI SZÖVETSÉG</span>
+                <span class="location-status">READY</span>
+            </button>
+            <button class="location football-location">
+                <span class="location-icon">⚽</span>
+                <span class="location-name">ALLIANZ ARENA</span>
+                <span class="location-status">READY</span>
+            </button>
+            <button class="location warzone-location">
+                <span class="location-icon">🪖</span>
+                <span class="location-name">HÁBORÚS ÖVEZET</span>
+                <span class="location-status">READY</span>
+            </button>
+            <button class="location apes-location">
+                <span class="location-icon">🐵</span>
+                <span class="location-name">MAJMOK BOLYGÓJA</span>
+                <span class="location-status">READY</span>
+            </button>
+                       <!-- DISCO SZOBA LAKATOLT VERZIÓJA -->
+            <button class="location disco-location" id="disco-location-button">
+                <span class="location-icon" id="disco-map-icon">🪩</span>
+                <span class="location-name">DISCO SZOBA</span>
+                <span class="location-status">READY</span>
+            </button>
+
+            <div class="map-decoration decoration-one"></div>
+            <div class="map-decoration decoration-two"></div>
+            <div class="map-decoration decoration-three"></div>
+        </div>
+        <div class="map-footer">
+            <p>VÁLASSZ EGY HELYET A KEZDÉSHEZ</p>
+            <button class="map-back-button">← FŐMENÜ</button>
+        </div>
+    </div>
+
+    <!-- ========================= ALLIANZ ARENA SCREEN ========================= -->
+    <div class="football-screen" style="display: none;">
+        <!-- PLAYER SELECTION -->
+        <div class="player-select-screen">
+            <div class="select-header-block">
+                <p class="football-small-title">APA: LEGENDARY EDITION</p>
+                <h1>ALLIANZ ARENA</h1>
+                <p class="select-subtitle">VÁLASZD KI A JÁTÉKOSOD</p>
+            </div>
+            <div class="players-grid-wrapper">
+                <div class="players">
+                    <button class="player-card" data-player="Müller">
+                        <div class="pixel-player">🏃‍♂️</div>
+                        <span class="player-name">MÜLLER</span>
+                        <span class="player-number">#25</span>
+                    </button>
+                    <button class="player-card" data-player="Ribéry">
+                        <div class="pixel-player">🏃‍♂️</div>
+                        <span class="player-name">RIBÉRY</span>
+                        <span class="player-number">#7</span>
+                    </button>
+                    <button class="player-card" data-player="Lewandowski">
+                        <div class="pixel-player">🏃‍♂️</div>
+                        <span class="player-name">LEWANDOWSKI</span>
+                        <span class="player-number">#9</span>
+                    </button>
+                    <button class="player-card" data-player="Beckenbauer">
+                        <div class="pixel-player">🏃‍♂️</div>
+                        <span class="player-name">BECKENBAUER</span>
+                        <span class="player-number">#5</span>
+                    </button>
+                    <button class="player-card" data-player="Kimmich">
+                        <div class="pixel-player">🏃‍♂️</div>
+                        <span class="player-name">KIMMICH</span>
+                        <span class="player-number">#6</span>
+                    </button>
+                </div>
+                <button class="football-back-button">← VISSZA A TÉRKÉPHEZ</button>
+            </div>
+        </div>
+
+        <!-- SHOOTING GAME -->
+        <div class="shooting-screen" style="display: none;">
+            <div class="shooting-game-layout">
+                <div class="shooting-sidebar-left">
+                    <p class="football-small-title">ALLIANZ ARENA</p>
+                    <h1>PENALTY SHOOTOUT</h1>
+                    
+                    <div class="bayern-logo-arcade"></div>
+                    
+                    <div class="shot-counter">
+                        LÖVÉSEK
+                        <strong><span id="shots-left">3</span></strong>
+                    </div>
+                    <div class="selected-player">
+                        JÁTÉKOS: <br><strong id="selected-player-name">---</strong>
+                    </div>
+                </div>
+                
+                <div class="shooting-center-field">
+                    <div class="football-field">
+                        <div class="crowd">░▒▓▒░▒▓ MIASANMIA ░▒▓▒░▒▓ MIASANMIA ░▒▓▒░▒▓</div>
+                        <div class="goal">
+                            <div class="target target-1" data-target="top-left"></div>
+                            <div class="target target-2" data-target="top-middle"></div>
+                            <div class="target target-3" data-target="top-right"></div>
+                            <div class="target target-4" data-target="bottom-left"></div>
+                            <div class="target target-5" data-target="bottom-right"></div>
+                            <div class="goalkeeper">🕴️</div>
+                        </div>
+                        <div class="ball">⚽</div>
+                    </div>
+                </div>
+
+                <div class="shooting-sidebar-right">
+                    <p id="shot-message" class="shot-message">VÁLASSZ EGY CÉLPONTOT!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESULT -->
+        <div class="football-result" style="display: none;">
+            <p class="football-small-title">ALLIANZ ARENA</p>
+            <h1 id="football-result-title">MISSION COMPLETE</h1>
+            <div id="football-result-score">0 / 3</div>
+            <p id="football-result-text">---</p>
+            <button class="result-map-button">← VISSZA A TÉRKÉPHEZ</button>
+        </div>
+    </div>
+
+       <!-- ========================= RENOVATION ALLIANCE SCREEN ========================= -->
+    <div class="renovation-screen" style="display: none;">
+        <div class="renovation-layout">
+            
+            <!-- BAL OLDALI INFÓ PANEL -->
+            <div class="renovation-sidebar-left">
+                <p class="renovation-small-title">KÜLDETÉS: 02</p>
+                <h1>FELÚJÍTÁSI SZÖVETSÉG</h1>
+                
+                <div class="build-counter">
+                    ÉPÍTÉSI FÁZIS
+                    <strong><span id="build-phase">0</span> / 4</strong>
+                </div>
+                
+                <p id="renovation-message" class="renovation-message">IDŐZÍTS JÓL ÉS ÉPÍTSD FEL A HÁZAT!</p>
+            </div>
+            
+            <!-- KÖZÉPSŐ ÉPÍTÉSI TERÜLET -->
+            <div class="renovation-center-field">
+                <div class="construction-yard">
+                    <div class="sky-background">☁️ ☁️</div>
+                    
+                    <!-- Dinamikus Ház Építőelemek (Fontos az ID-k megléte!) -->
+                    <div class="house-container">
+                        <div id="house-roof" class="house-part roof-part"></div>
+                        <div id="house-top" class="house-part top-part"></div>
+                        <div id="house-middle" class="house-part middle-part"></div>
+                        <div id="house-base" class="house-part base-part"></div>
+                    </div>
+                    
+                    <!-- FIXÁLT IDŐZÍTŐ SÁV ÉS A BELSŐ STRUKTÚRÁK -->
+                    <div class="timing-bar-container">
+                        <div class="zone zone-fail-left"></div>
+                        <div class="zone zone-success"></div>
+                        <div class="zone zone-fail-right"></div>
+                        <div id="timing-indicator" class="timing-indicator"></div>
+                    </div>
+                    
+                    <!-- AKCIÓ GOMB -->
+                    <button id="hammer-button" class="hammer-button">🔨 KALAPÁCSOLÁS!</button>
+                </div>
+            </div>
+
+            <!-- JOBB OLDALI PANEL -->
+            <div class="renovation-sidebar-right">
+                <button class="renovation-back-button">← VISSZA A TÉRKÉPHEZ</button>
+            </div>
+            
+        </div>
+
+        <!-- SIKERES JÁTÉK VÉGE PANEL -->
+        <div class="renovation-result" style="display: none;">
+            <p class="renovation-small-title">KÜLDETÉS JELENTÉS</p>
+            <h1 id="reno-result-title">HÁZ FELÉPÍTVE!</h1>
+            <div class="success-badge">🏆 SIKER</div>
+            <p id="reno-result-text">MINDEN ELEM A HELYÉRE KERÜLT.</p>
+            <button class="reno-result-map-button">← VISSZA A TÉRKÉPHEZ</button>
+        </div>
+    </div>
+        <!-- ========================= PLANET OF THE APES SCREEN ========================= -->
+    <div class="apes-screen" style="display: none;">
+        <div class="apes-layout">
+            
+            <!-- BAL OLDALI INFÓ PANEL -->
+            <div class="apes-sidebar-left">
+                <p class="apes-small-title">KÜLDETÉS: 03</p>
+                <h1>MAJMOK BOLYGÓJA</h1>
+                
+                <div class="apes-hud-item">
+                    PONTSZÁM
+                    <strong><span id="apes-score">0</span> / 1500</strong>
+                </div>
+
+                <div class="apes-hud-item" style="margin-top: 20px;">
+                    ÉLETEK
+                    <strong id="apes-lives" style="color: #ff2255;">❤️❤️❤️</strong>
+                </div>
+                
+                <p id="apes-message" class="apes-message">BAL / JOBB NYILAKKAL MOZOGJ! ELDŐLT A BANÁNESŐ!</p>
+            </div>
+            
+            <!-- KÖZÉPSŐ DZSONGEL JÁTÉKTÉR -->
+            <div class="apes-center-field">
+                <div class="jungle-yard">
+                    <!-- A majmok az ágakon -->
+                    <div class="jungle-canopy">🐒 🐒 <span>🐵</span> 🐒 🐒</div>
+                    
+                    <!-- Dinamikusan potyogó gyümölcsök konténere -->
+                    <div id="falling-objects-container"></div>
+                    
+                    <!-- A JÁTÉKOS KOSARA (Tiszta retro emoji karakter) -->
+                    <div id="basket-player" class="basket-player">🧺</div>
+
+                    <!-- MOBIL / EGÉR IRÁNYÍTÓ GOMBOK (Ha nem billentyűzetről játszol) -->
+                    <div class="apes-controls">
+                        <button id="btn-move-left" class="arrow-btn">◀</button>
+                        <button id="btn-move-right" class="arrow-btn">▶</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JOBB OLDALI PANEL -->
+            <div class="apes-sidebar-right">
+                <button class="apes-back-button">← VISSZA A TÉRKÉPHEZ</button>
+            </div>
+            
+        </div>
+
+        <!-- JÁTÉK VÉGE PANEL (NYERTÉL / GAME OVER) -->
+        <div class="apes-result" style="display: none;">
+            <p class="apes-small-title">KÜLDETÉS JELENTÉS</p>
+            <h1 id="apes-result-title">MISSION COMPLETE</h1>
+            <div id="apes-result-badge" class="success-badge">🏆 SIKER</div>
+            <p id="apes-result-text">---</p>
+            <button class="apes-result-map-button">← VISSZA A TÉRKÉPHEZ</button>
+        </div>
+    </div>
+    <!-- ========================= WARZONE SCREEN (LARGE & SHUFFLED) ========================= -->
+    <div class="warzone-screen" style="display: none;">
+        <div class="warzone-layout">
+            
+            <!-- BAL OLDALI INFÓ PANEL -->
+            <div class="warzone-sidebar-left">
+                <p class="warzone-small-title">KÜLDETÉS: 04</p>
+                <h1 class="wz-main-title">HÁBORÚS ÖVEZET</h1>
+                
+                <div class="warzone-hud-item">
+                    ELINTÉZVE
+                    <strong class="wz-huge-counter"><span id="warzone-done-count">0</span> / 4</strong>
+                </div>
+                
+                <p id="warzone-message" class="warzone-message">HÚZD A JOBB OLDALI TÁRGYAKAT A BAL OLDALI MEGFELELŐ CSALÁDTAGOKRA!</p>
+            </div>
+            
+            <!-- KÖZÉPSŐ ÖSSZEHÚZÓS PÁLYA -->
+            <div class="warzone-center-field">
+                <div class="matchmaking-board">
+                    
+                    <!-- BAL HASÁB: A CSALÁDTAGOK (FOGADÓ ZÓNÁK) -->
+                    <div class="match-column family-column">
+                        <div class="match-node char-node" data-char="ANYA">
+                            <div class="char-avatar">👩‍🦰</div>
+                            <div class="char-name-label">ANYA</div>
+                            <div id="bubble-ANYA" class="wz-demand-bubble">🍫 ZABRUDIT KÉR!</div>
+                        </div>
+                        <div class="match-node char-node" data-char="KIRA">
+                            <div class="char-avatar">👩</div>
+                            <div class="char-name-label">KIRA</div>
+                            <div id="bubble-KIRA" class="wz-demand-bubble">🔑 KOLIBA MENNE!</div>
+                        </div>
+                        <div class="match-node char-node" data-char="RELLA">
+                            <div class="char-avatar">👧</div>
+                            <div class="char-name-label">RELLA</div>
+                            <div id="bubble-RELLA" class="wz-demand-bubble">🍬 CSOKIT KÉR!</div>
+                        </div>
+                        <div class="match-node char-node" data-char="ADÉL">
+                            <div class="char-avatar">👩</div>
+                            <div class="char-name-label">ADÉL</div>
+                            <div id="bubble-ADÉL" class="wz-demand-bubble">💳 KÁRTYÁT KÉR!</div>
+                        </div>
+                    </div>
+
+                    <!-- JOBB HASÁB: A HÚZHATÓ TÁRGYAK -->
+                    <div class="match-column items-column" id="wz-items-container">
+                        <div class="match-node item-node" draggable="true" data-item="ZABRUDI">
+                            <div class="item-icon">🍫</div>
+                            <div class="item-label">ZABRUDI</div>
+                        </div>
+                        <div class="match-node item-node" draggable="true" data-item="KOLIBA">
+                            <div class="item-icon">🔑</div>
+                            <div class="item-label">KOCSIKULCS</div>
+                        </div>
+                        <div class="match-node item-node" draggable="true" data-item="CSOKI">
+                            <div class="item-icon">🍬</div>
+                            <div class="item-label">CSOKI</div>
+                        </div>
+                        <div class="match-node item-node" draggable="true" data-item="PÉNZ">
+                            <div class="item-icon">💳</div>
+                            <div class="item-label">KÁRTYA</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- JOBB OLDALI PANEL -->
+            <div class="warzone-sidebar-right">
+                <button class="warzone-back-button">← MENEKÜLÉS</button>
+            </div>
+            
+        </div>
+
+        <!-- JÁTÉK VÉGE PANEL -->
+        <div class="warzone-result" style="display: none;">
+            <p class="warzone-small-title">CSALÁDI JELENTÉS</p>
+            <h1 id="warzone-result-title">MISSION COMPLETE</h1>
+            <div id="warzone-result-badge" class="success-badge">🏆 TÚLÉLVE</div>
+            <p id="warzone-result-text">MINDEN KÍVÁNSÁG TELJESÜLT, BÉKE VAN ITTHON!</p>
+            <button class="warzone-result-map-button">← VISSZA A TÉRKÉPHEZ</button>
+        </div>
+    </div>
+        <!-- ========================= DISCO ROOM (MEGA NEON & SHUFFLED QUIZ) ========================= -->
+    <div class="disco-screen" style="display: none;">
+        <div class="disco-layout">
+            
+            <!-- BAL OLDALI INFÓ PANEL -->
+            <div class="disco-sidebar-left">
+                <p class="disco-small-title">KÜLDETÉS: 05</p>
+                <h1 class="disco-main-title">DISCO SZOBA</h1>
+                
+                <div class="disco-hud-item">
+                    TALÁLATOK
+                    <strong class="disco-huge-counter"><span id="disco-correct-count">0</span> / 10</strong>
+                </div>
+                
+                <p id="disco-message" class="disco-message">KATTINTS A RETRÓ LEJÁTSZÁS GOMBRA, MAJD TALÁLD KI A DAL CÍMÉT!</p>
+            </div>
+            
+            <!-- KÖZÉPSŐ AUDIO VISUALIZER JÁTÉKTÉR -->
+            <div class="disco-center-field">
+                <div class="visualizer-yard">
+                    
+                    <!-- FELÜL: LEJÁTSZÁS GOMB ÉS AZ ANIMÁLT RETRÓ HANGHULLÁMOK -->
+                    <div class="audio-player-block">
+                        <button id="disco-play-btn" class="disco-play-btn">▶</button>
+                        <div class="disco-ball-animation">🪩</div>
+                        <div class="retro-waveform" id="retro-waveform">
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                        </div>
+                    </div>
+
+                    <!-- ALUL: AZ ALBUM BORÍTÓK ÉS CÍMEK RÁCSA -->
+                    <div class="album-covers-grid" id="disco-albums-container">
+                        <!-- Ide a JavaScript rakja be a kártyákat kevert sorrendben -->
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- JOBB OLDALI PANEL -->
+            <div class="disco-sidebar-right">
+                <button class="disco-back-button">← MENEKÜLÉS</button>
+            </div>
+            
+        </div>
+
+        <!-- DISCO GYŐZELMI PANEL -->
+        <div class="disco-result" style="display: none;">
+            <p class="disco-small-title">DISCO JELENTÉS</p>
+            <h1 id="disco-result-title">BULI KIMAXOLVA!</h1>
+            <div class="success-badge">🪩 RETRÓ SIKER</div>
+            <p id="disco-result-text">MIND A 10 KEDVENC ZENÉT SIKERESEN FELISMERTÉL!</p>
+            <button class="disco-result-map-button">← VISSZA A TÉRKÉPHEZ</button>
+        </div>
+    </div>
+     <!-- ========================= SZÜLINAPI VIDEÓ FELUGRÓ ABLAK (KÜLÖN HANGSÁGGAL) ========================= -->
+    <div id="wz-video-popup" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center; flex-direction: column; padding: 20px;">
+        <div style="position: relative; width: 100%; max-width: 800px; background: #000; border: 4px solid #fff; box-shadow: 0 0 20px #ff00ff; padding: 10px; display: flex; flex-direction: column; align-items: center;">
+            
+            <!-- A VIDEÓ FÁJL (Csak a kép) -->
+            <video id="wz-birthday-video" style="width: 100%; max-height: 500px; background: #000;">
+                <source src="video/video.mp4" type="video/mp4">
+                A böngésződ nem támogatja a videó lejátszást.
+            </video>
+
+            <!-- AZ ÚJ KÜLÖNÁLLÓ HANGSÁV (Rejtett, de a háttérben szinkronizálva szól) -->
+            <audio id="wz-birthday-audio">
+                <source src="music/zene11.mp3" type="audio/mpeg">
+
+            </audio>
+            
+            <!-- JAVÍTOTT ARCADE VEZÉRLŐ GOMBOK (Mivel a beépített sáv nem indítaná el a külön hangot) -->
+            <div style="display: flex; gap: 20px; margin-top: 15px;">
+                <button id="wz-play-video-btn" style="background: #00ff66; color: #000; border: 3px solid #000; padding: 10px 25px; font-family: monospace; font-size: 14px; font-weight: bold; cursor: pointer;">▶ LEJÁTSZÁS</button>
+                <button id="wz-pause-video-btn" style="background: #ffcc00; color: #000; border: 3px solid #000; padding: 10px 25px; font-family: monospace; font-size: 14px; font-weight: bold; cursor: pointer;">⏸ SZÜNET</button>
+                <button id="wz-close-video-btn" style="background: #ff2255; color: #fff; border: 3px solid #000; padding: 10px 25px; font-family: monospace; font-size: 14px; font-weight: bold; cursor: pointer;">[ X ] BEZÁRÁS</button>
+            </div>
+        </div>
+    </div>
+      <!-- ========================= ACHIEVEMENTS SCREEN (MINDIG NYITVA VERZIÓ) ========================= -->
+    <div class="achievements-screen" style="display: none;">
+        <p class="achievements-small-title">KÁRAI CSALÁD JÁTÉKKONZOL</p>
+        <h1>TRÓFEATEREM</h1>
+        <p class="achievements-subtitle">APA LEGENDÁS ELISMERÉSEI</p>
+        
+        <div class="achievements-grid">
+            <!-- 1. Trófea -->
+            <div class="achievement-card unlocked">
+                <div class="ach-icon">🐉</div>
+                <div class="ach-info">
+                    <h3>LEGJOBB HEROES 3 JÁTÉKOS</h3>
+                    <p>Minden bázist bevesz, a sárkányok és a várak sem fognak ki rajta.</p>
+                </div>
+            </div>
+
+            <!-- 2. Trófea -->
+            <div class="achievement-card unlocked">
+                <div class="ach-icon">👑</div>
+                <div class="ach-info">
+                    <h3>LEGJOBB APA A VILÁGON</h3>
+                    <p>Hivatalos, a Kárai család által megerősített örökös bajnoki státusz.</p>
+                </div>
+            </div>
+
+            <!-- 3. Trófea (Mostantól ez is alapból nyitva van!) -->
+            <div class="achievement-card unlocked">
+                <div class="ach-icon">🪩</div>
+                <div class="ach-info">
+                    <h3>LEGJOBB ZENEI ÍZLÉS</h3>
+                    <p>A MARGE-tól a Metallicáig és a Bëlgáig minden stílusban otthon van.</p>
+                </div>
+            </div>
+
+            <!-- 4. Trófea (Ez is alapból nyitva van!) -->
+            <div class="achievement-card unlocked">
+                <div class="ach-icon">🏗️</div>
+                <div class="ach-info">
+                    <h3>MESTEREZREZED</h3>
+                    <p>Mindent megszerel, felépít, és otthon mindig megmenti a helyzetet.</p>
+                </div>
+            </div>
+        </div>
+
+        <button class="achievements-back-button">← FŐMENÜ</button>
+    </div>
+    <!-- ========================= RETRO ÚSZÓ SZÜLINAPI FELIRAT BLOCK ========================= -->
+    <div id="wz-birthday-banner" style="display: none; position: fixed; inset: 0; background: rgba(12, 8, 28, 0.95); z-index: 99999; justify-content: center; align-items: center; flex-direction: column; padding: 20px; border: 10px solid #ff00ff; box-shadow: 0 0 30px #00ffff;">
+        
+        <!-- Hatalmas neon felirat -->
+        <h1 class="neon-birthday-text" style="font-size: 40px !important; color: #ffffff; text-align: center; line-height: 1.6; text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #00ffff; animation: text-shake 0.3s infinite alternate;">
+            BOLDOG<br>SZÜLINAPOT<br>APA!
+        </h1>
+
+        <!-- ÚJ: Cuki személyes üzenet emojikkal -->
+        <p style="font-family: 'Press Start 2P', monospace; font-size: 16px; color: #00ffcc; margin-top: 30px; text-align: center; line-height: 1.6; text-shadow: 2px 2px #000;">
+            KÖSZÖNÖM, HOGY VAGY NEKÜNK! 🥰🫶✨
+        </p>
+
+        <!-- Egyedi ünnepi leírás -->
+        <p style="font-family: 'Press Start 2P', monospace; font-size: 11px; color: #ffff00; margin-top: 30px; text-align: center; line-height: 1.8;">
+            MINDEN KÜLDETÉS TELJESÍTVE!<br>TE VAGY A LEGJOBB APA!
+        </p>
+
+        <!-- Banner bezáró gomb -->
+        <button id="wz-close-banner-btn" style="background: #00ffff; color: #000; border: 4px solid #000; padding: 15px 35px; font-family: 'Press Start 2P', monospace; font-size: 13px; font-weight: bold; cursor: pointer; box-shadow: inset -4px -4px 0 #00aaaa, inset 4px 4px 0 #88ffff; margin-top: 40px;">
+            ← VISSZA A JÁTÉKHOZ
+        </button>
+    </div>
+
+<!-- AZ ÚJ KÜLÖNÁLLÓ HANGSÁV -->
+<audio id="wz-birthday-audio">
+    <source src="music/zene11.mp3" type="audio/mpeg">
+</audio>
+
+
+
+</main>
+<script src="script.js"></script>
+</body>
+</html>
