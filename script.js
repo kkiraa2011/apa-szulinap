@@ -140,7 +140,7 @@ let songsPlayedPool = [];
 let currentMp3Audio = null;
 
 const retroPlaylist = [
-    { title: "MARGE - VÁRATLAN NYÁR", cover: "☀️", mp3: "music/zene1.wav" },
+    { title: "MARGE - VÁRATLAN NYÁR", cover: "☀️", mp3: "music/zene1.m4a" },
     { title: "THE PRODIGY - FIRESTARTER", cover: "🔥", mp3: "music/zene2.wav" },
     { title: "BETON.HOFI X ANUBII\$ - TÜKÖRTEREM", cover: "🪞", mp3: "music/zene3.wav" },
     { title: "METALLICA - ONE", cover: "🎸", mp3: "music/zene4.wav" },
